@@ -19,9 +19,9 @@ public class Main {
 
         HelpFormatter formatter = new HelpFormatter();
         Options options = new Options();
-        options.addOption(InsertFile.OPERATION, null, false, "import from file");
-        options.addOption(InsertCmdLine.OPERATION, null, false, "insert document from command line");
-        options.addOption(WriteFileCmdLine.OPERATION, null, false, String.format("write insert to a file to be importe later with [%s]", InsertFile.FILE));
+        options.addOption(InsertFile.OPERATION, null, false, "OPERATION: import from file");
+        options.addOption(InsertCmdLine.OPERATION, null, false, "OPERATION: insert document from command line");
+        options.addOption(WriteFileCmdLine.OPERATION, null, false, String.format("OPERATION: write insert to a file to be importe later with [%s]", InsertFile.FILE));
 
         options.addOption(Operation.FILE, "file", true, "file to load");
         options.addOption(Operation.KEY, "key", true, "key of document will be inserted");
@@ -39,7 +39,6 @@ public class Main {
             operation.doIt();
 
         } catch (Exception e) {
-            e.printStackTrace(); //TODO treure
             // automatically generate the help statement
             formatter.printHelp("cb-cli", options, true);
         }
