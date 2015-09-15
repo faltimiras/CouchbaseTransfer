@@ -1,0 +1,9 @@
+<fileEntries>
+    <entries>
+        <fileEntry bucketName="bucketName">
+            <docs>
+                <doc failIfPresent="false" key="key">{"hola":"adeu"}</doc>
+            </docs>
+        </fileEntry>
+    </entries>
+</fileEntries>
