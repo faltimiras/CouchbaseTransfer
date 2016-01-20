@@ -39,6 +39,7 @@ public class InsertCmdLine extends Operation {
 			try {
 				this.timeout = Long.valueOf(args.getOptionValue(TIMEOUT));
 			} catch (NumberFormatException e) {
+				System.out.println("Number format not correct, default value will be used");
 				this.timeout = null;
 			} 
         } 
