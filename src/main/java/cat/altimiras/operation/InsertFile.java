@@ -17,6 +17,7 @@ public class InsertFile extends  Operation {
     public static final String FILE = "f";
 
     private String host;
+	private Long timeout;
     private String fileName;
 
     public InsertFile(CommandLine args){
@@ -37,6 +38,13 @@ public class InsertFile extends  Operation {
         } else {
             throw new IllegalArgumentException("host is required");
         }
+		if (args.hasOption(TIMEOUT)){
+			try {
+				this.timeout = Long.valueOf(args.getOptionValue(TIMEOUT));
+			} catch (NumberFormatException e) {
+				this.timeout = null;
+			} 
+        } 
     }
 
     @Override
@@ -45,7 +53,7 @@ public class InsertFile extends  Operation {
         Parser parser = new Parser();
         List<FileEntry> entries = parser.getDataToImport(this.fileName);
 
-        CouchbaseCli client = new CouchbaseCli(this.host);
+        CouchbaseCli client = new CouchbaseCli(this.host, this.timeout);
 
         for(FileEntry entry : entries){
             client.insertDocuments(entry.getBucketName(), entry.getBucketPsw(), entry.getDocs());

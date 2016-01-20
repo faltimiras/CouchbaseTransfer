@@ -15,6 +15,7 @@ public class InsertCmdLine extends Operation {
 
     private String document;
     private String host;
+	private Long timeout;
     private String key;
     private String bucket;
     private String password;
@@ -34,6 +35,13 @@ public class InsertCmdLine extends Operation {
         } else {
             throw new IllegalArgumentException("host is required");
         }
+		if (args.hasOption(TIMEOUT)){
+			try {
+				this.timeout = Long.valueOf(args.getOptionValue(TIMEOUT));
+			} catch (NumberFormatException e) {
+				this.timeout = null;
+			} 
+        } 
         if (args.hasOption(BUCKET)){
             this.bucket = args.getOptionValue(BUCKET);
         } else {
@@ -63,7 +71,7 @@ public class InsertCmdLine extends Operation {
             this.document = doc.toString();
         }
 
-        CouchbaseCli client = new CouchbaseCli(this.host);
+        CouchbaseCli client = new CouchbaseCli(this.host, this.timeout);
         client.insertDocument(this.bucket, new InsertDoc(this.key, this.document));
     }
 }

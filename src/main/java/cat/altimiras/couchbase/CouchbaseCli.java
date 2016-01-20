@@ -7,27 +7,32 @@ import com.couchbase.client.java.document.RawJsonDocument;
 import com.couchbase.client.java.error.DocumentAlreadyExistsException;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class CouchbaseCli {
+	
+	public Long TIMEOUT_DEFAULT = 10l;
 
     private Cluster cluster;
+	private Long timeout;
 
-    public CouchbaseCli(String host) {
+    public CouchbaseCli(String host, Long timeout) {
         this.cluster = CouchbaseCluster.create(host);
+		this.timeout = timeout == null ? TIMEOUT_DEFAULT : timeout;
     }
 
     public void insertDocuments(String bucketName, String psw, List<InsertDoc> docs) {
-        Bucket bucket = cluster.openBucket(bucketName, psw);
+        Bucket bucket = cluster.openBucket(bucketName, psw, this.timeout, TimeUnit.SECONDS);
         insert(bucket, docs);
     }
 
     public void insertDocuments(String bucketName, List<InsertDoc> docs) {
-        Bucket bucket = cluster.openBucket(bucketName);
+        Bucket bucket = cluster.openBucket(bucketName, this.timeout, TimeUnit.SECONDS);
         insert(bucket, docs);
     }
 
     public void insertDocument(String bucketName, InsertDoc doc){
-        Bucket bucket = cluster.openBucket(bucketName);
+        Bucket bucket = cluster.openBucket(bucketName, this.timeout, TimeUnit.SECONDS);
         insert(bucket, doc);
     }
 

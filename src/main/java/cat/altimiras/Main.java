@@ -28,6 +28,7 @@ public class Main {
         options.addOption(Operation.DOCUMENT, "document", true, "document will be inserted, if it is not set can be writed or copied directly on the console.");
         options.addOption(Operation.PSW, "password", true, "password to connect to bucket");
         options.addOption(Operation.HOST, "host", true, "url to couchbase, with port");
+		options.addOption(Operation.TIMEOUT, "timeout", true, "couchbase connection timeout");
         options.addOption(Operation.BUCKET, "bucket", true, "bucket where insert");
         options.addOption(Operation.FAIL_EXIST, "fail-update", false, "fail is key is already stored");
 

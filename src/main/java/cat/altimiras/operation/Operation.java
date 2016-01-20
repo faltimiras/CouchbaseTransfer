@@ -5,7 +5,8 @@ import org.apache.commons.cli.CommandLine;
 public abstract class Operation {
 
     public static final String HOST = "h";
-
+	public static final String TIMEOUT = "t";
+	
     public static final String BUCKET = "b";
     public static final String PSW = "p";
     public static final String DOCUMENT = "d";
